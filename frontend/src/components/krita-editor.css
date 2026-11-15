@@ -1,0 +1,122 @@
+.krita-editor {
+  --ke-page: var(--page, #0d121d); --ke-surface: var(--surface, #171e2c);
+  --ke-border: var(--border, #303b50); --ke-muted: var(--muted, #96a2b8);
+  --ke-text: var(--text, #edf2fc); --ke-accent: var(--accent, #ac9aff);
+  width: min(1400px, 94vw); max-width: 94vw; max-height: 92dvh; margin: auto; padding: 0;
+  border: 1px solid var(--ke-border); border-radius: 18px; background: var(--ke-surface);
+  color: var(--ke-text); box-shadow: 0 32px 100px #0007; overflow: visible; font-size: 13px;
+}
+.krita-editor.is-empty { width: min(980px, 94vw); }
+.krita-editor::backdrop { background: #060912b8; backdrop-filter: blur(5px); }
+.krita-editor .krita-header { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 20px 24px; border-bottom: 1px solid var(--ke-border); }
+.krita-heading, .krita-header-actions { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.krita-heading h2 { font-size: 17px; line-height: 1.4; letter-spacing: -.02em; margin: 2px 0 0; }
+.krita-heading small { font-size: 10px; letter-spacing: .08em; color: var(--ke-muted); }
+.krita-brand { display: grid; place-items: center; width: 42px; height: 42px; flex-shrink: 0; border-radius: 12px; color: var(--ke-accent); background: var(--accent-soft, #ac9aff16); border: 1px solid color-mix(in srgb, var(--ke-accent) 25%, transparent); }
+.krita-editor button, .krita-editor a, .krita-editor label { font: inherit; }
+.krita-editor button, .krita-editor a, .krita-toolbar label, .krita-export summary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 35px; padding: 7px 11px; border: 1px solid transparent; border-radius: 8px; text-decoration: none; color: var(--ke-text); background: transparent; cursor: pointer; box-sizing: border-box; }
+.krita-editor button:hover:not(:disabled), .krita-editor a:hover, .krita-toolbar label:hover, .krita-export summary:hover { background: var(--hover, #ffffff09); }
+.krita-editor button:disabled, .krita-editor .disabled, .krita-editor [aria-disabled=true] { opacity: .45; cursor: default; }
+.krita-editor svg { flex-shrink: 0; }
+.krita-editor .krita-primary { background: var(--ds-primary, #ac9aff); color: var(--ds-primary-text, #161126); font-weight: 650; padding-inline: 15px; }
+.krita-editor .krita-primary:hover:not(:disabled) { background: var(--ds-primary-hover, #c4b6ff); }
+.krita-editor .krita-close { padding: 7px; color: var(--ke-muted); }
+.krita-editor :focus-visible, .krita-editor label:focus-within { outline: 2px solid var(--ke-accent); outline-offset: 3px; }
+.krita-editor input[type=file] { position: absolute; width: 1px; height: 1px; opacity: 0; overflow: hidden; clip-path: inset(50%); }
+.krita-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 9px 20px; border-bottom: 1px solid var(--ke-border); }
+.krita-tool-group { display: flex; align-items: center; flex-wrap: wrap; gap: 3px; min-width: 0; }
+.krita-tool-divider { height: 18px; width: 1px; background: var(--ke-border); margin-inline: 7px; }
+.krita-toolbar label { position: relative; }
+.krita-export { position: relative; flex-shrink: 0; }
+.krita-export summary { list-style: none; border-color: var(--ke-border); background: var(--ke-surface); }
+.krita-export summary::-webkit-details-marker, .krita-help summary::-webkit-details-marker { display: none; }
+.krita-export > div { position: absolute; inset-inline-end: 0; top: calc(100% + 7px); z-index: 4; display: grid; min-width: 185px; padding: 6px; border: 1px solid var(--ke-border); border-radius: 10px; background: var(--ke-surface); box-shadow: 0 12px 35px #0004; }
+.krita-export a, .krita-export button { justify-content: flex-start; width: 100%; white-space: nowrap; }
+.krita-layout { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 260px; height: min(650px, 65dvh); min-height: 320px; background: var(--ke-page); overflow: hidden; }
+.is-empty .krita-layout { display: block; height: auto; min-height: 0; background: radial-gradient(ellipse at 50% 0%, var(--accent-soft, #ac9aff10), transparent 65%), var(--ke-page); }
+.krita-layout.is-dragging::after { content: ''; position: absolute; inset: 8px; border: 2px dashed var(--ke-accent); border-radius: 12px; background: var(--accent-soft, #ac9aff16); pointer-events: none; z-index: 5; }
+.krita-canvas { display: flex; align-items: center; justify-content: center; min-width: 0; min-height: 0; padding: 28px; overflow: auto; background-image: radial-gradient(var(--ke-border) .65px, transparent .65px); background-size: 18px 18px; }
+.krita-image-surface { display: flex; max-width: 100%; max-height: 100%; box-shadow: 0 8px 32px #0004; background: repeating-conic-gradient(#b0b0b0 0 25%, #ddd 0 50%) 0/16px 16px; }
+.krita-image-surface img { display: block; max-width: 100%; max-height: calc(min(650px, 65dvh) - 56px); object-fit: contain; }
+.krita-inspector { display: flex; flex-direction: column; min-height: 0; border-inline-start: 1px solid var(--ke-border); background: var(--ke-surface); }
+.krita-inspector-heading { display: flex; align-items: center; justify-content: space-between; padding: 17px 16px; border-bottom: 1px solid var(--ke-border); }
+.krita-inspector h3 { display: flex; align-items: center; gap: 9px; font-size: 12px; margin: 0; }
+.krita-inspector-heading > span { font-size: 11px; border: 1px solid var(--ke-border); border-radius: 5px; padding: 1px 6px; color: var(--ke-muted); }
+.krita-layer-list { padding: 10px; overflow: auto; flex: 1; }
+.krita-layer { display: flex; align-items: center; gap: 5px; padding: 5px; margin-bottom: 5px; border: 1px solid transparent; border-radius: 9px; }
+.krita-layer.is-active { background: var(--accent-soft, #ac9aff16); border-color: color-mix(in srgb, var(--ke-accent) 40%, transparent); }
+.krita-layer-visibility { display: flex; padding: 5px; cursor: pointer; }
+.krita-layer-visibility input { accent-color: var(--ke-accent); width: 14px; height: 14px; margin: 0; }
+.krita-editor .krita-layer-select { justify-content: flex-start; flex: 1; min-width: 0; padding: 2px 3px; font-size: 12px; }
+.krita-layer-symbol { display: grid; place-items: center; width: 33px; height: 35px; border: 1px solid var(--ke-border); border-radius: 5px; color: var(--ke-muted); background: var(--ke-page); }
+.krita-layer-properties { padding: 18px 16px; border-top: 1px solid var(--ke-border); }
+.krita-layer-properties label { display: flex; justify-content: space-between; font-size: 12px; }
+.krita-layer-properties output { color: var(--ke-muted); font-variant-numeric: tabular-nums; }
+.krita-layer-properties input { width: 100%; margin: 17px 0; accent-color: var(--ke-accent); }
+.krita-layer-properties button { width: 100%; border-color: var(--ke-border); background: var(--ds-control, #202a3b); }
+.krita-start { max-width: 680px; margin: auto; padding: 40px 30px 27px; text-align: center; }
+.krita-start-symbol { display: grid; place-items: center; width: 64px; height: 64px; margin: 0 auto 18px; border: 1px solid var(--ke-border); border-radius: 18px; background: var(--ke-surface); color: var(--ke-accent); box-shadow: 0 8px 28px #0001; }
+.krita-start h3 { font-size: 23px; letter-spacing: -.03em; line-height: 1.3; margin: 0 0 10px; }
+.krita-start-heading > p { font-size: 13px; color: var(--ke-muted); margin: 0 0 26px; line-height: 1.6; }
+.krita-start-options { display: grid; grid-template-columns: minmax(0, 1fr); max-width: 330px; margin: auto; gap: 16px; }
+.krita-start-options.with-selected { max-width: 590px; grid-template-columns: 1fr 1fr; }
+.krita-open-card { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; min-height: 185px; padding: 20px; border: 1px dashed color-mix(in srgb, var(--ke-accent) 50%, var(--ke-border)); border-radius: 13px; background: var(--ke-surface); cursor: pointer; }
+.krita-open-card:hover:not(.disabled) { border-color: var(--ke-accent); background: var(--accent-soft, #ac9aff16); }
+.krita-open-icon { color: var(--ke-accent); margin-bottom: 3px; }
+.krita-open-card strong { font-weight: 650; font-size: 14px; }
+.krita-open-card small { font-size: 11px; color: var(--ke-muted); }
+.krita-card-action { display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 7px; padding: 6px 12px; border-radius: 6px; background: var(--ds-primary, #ac9aff); color: var(--ds-primary-text, #161126); font-size: 11px; font-weight: 650; }
+.krita-editor .krita-selected-card { display: flex; flex-direction: column; gap: 0; overflow: hidden; border: 1px solid var(--ke-border); padding: 0; background: var(--ke-surface); border-radius: 13px; min-width: 0; text-align: start; }
+.krita-selected-thumbnail { height: 145px; width: 100%; overflow: hidden; background: var(--ke-page); }
+.krita-selected-thumbnail img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.krita-selected-card > span { display: flex; align-items: center; justify-content: space-between; gap: 8px; width: 100%; box-sizing: border-box; padding: 14px; font-size: 12px; }
+.krita-selected-card strong { font-weight: 550; }.krita-selected-card svg { color: var(--ke-accent); }
+.krita-editor .krita-selected-card:hover:not(:disabled) { border-color: var(--ke-accent); background: var(--ke-surface); }
+.krita-editor .krita-resume { margin-top: 18px; font-size: 11px; color: var(--ke-muted); }
+.krita-footer { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 42px; padding: 6px 20px; border-top: 1px solid var(--ke-border); box-sizing: border-box; }
+.krita-footer > span { display: flex; align-items: center; gap: 8px; color: var(--ke-muted); font-size: 10px; }
+.krita-ready-dot { height: 5px; width: 5px; border-radius: 50%; background: var(--ds-success, #73d1af); }.krita-footer-divider { opacity: .5; }
+.krita-help { position: relative; }.krita-help summary { display: flex; color: var(--ke-muted); padding: 4px; cursor: pointer; list-style: none; }
+.krita-help p { position: absolute; bottom: calc(100% + 8px); inset-inline-end: 0; width: min(300px, 75vw); padding: 14px; font-size: 12px; line-height: 1.7; background: var(--ke-surface); border: 1px solid var(--ke-border); border-radius: 10px; box-shadow: 0 8px 25px #0003; z-index: 6; }
+.krita-error { display: flex; align-items: center; gap: 9px; padding: 12px 22px; background: color-mix(in srgb, var(--ds-danger, #f28c96) 10%, var(--ke-surface)); color: var(--ds-danger, #f28c96); border-bottom: 1px solid var(--ke-border); font-size: 12px; }
+.krita-busy { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 12px; z-index: 3; background: color-mix(in srgb, var(--ke-page) 90%, transparent); backdrop-filter: blur(3px); padding: 20px; text-align: center; }
+.krita-busy p { font-size: 12px; color: var(--ke-muted); margin: 0; }
+.krita-spinner { height: 23px; width: 23px; border: 2px solid var(--ke-border); border-top-color: var(--ke-accent); border-radius: 50%; animation: krita-spin .8s linear infinite; }
+@keyframes krita-spin { to { transform: rotate(360deg); } }
+@media(prefers-reduced-motion:reduce) { .krita-spinner { animation: none; border-color: var(--ke-accent); } }
+@media(max-width:760px) {
+  .krita-editor { max-height: 94dvh; overflow: auto; border-radius: 13px; }
+  .krita-editor .krita-header { padding: 14px; gap: 10px; }.krita-heading h2 { font-size: 14px; }.krita-brand { width: 34px; height: 34px; border-radius: 9px; }
+  .krita-header-actions { gap: 3px; }.krita-editor .krita-ai-action { font-size: 10px; padding: 7px; max-width: 140px; }
+  .krita-toolbar { padding: 7px 9px; gap: 5px; }.krita-tool-group { gap: 0; }
+  .krita-tool-group > label, .krita-tool-group > button { font-size: 10px; padding: 6px; }.krita-tool-divider { display: none; }.krita-export summary { font-size: 11px; padding: 6px; }
+  .krita-layout { height: auto; grid-template-columns: 1fr; min-height: 0; }.krita-canvas { height: 42dvh; padding: 16px; box-sizing: border-box; }
+  .krita-image-surface img { max-height: calc(42dvh - 32px); }.krita-inspector { border-inline-start: 0; border-top: 1px solid var(--ke-border); }
+  .krita-inspector-heading { padding: 12px 14px; }.krita-layer-list { max-height: 145px; }.krita-layer-properties { padding: 13px 14px; }
+  .krita-start { padding: 27px 18px 18px; }.krita-start h3 { font-size: 20px; }.krita-start-options.with-selected { gap: 10px; }
+  .krita-open-card { padding: 12px; min-height: 155px; }.krita-selected-thumbnail { height: 117px; }.krita-selected-card > span { padding: 10px; font-size: 10px; }
+  .krita-footer { padding-inline: 14px; }.krita-footer > span { font-size: 9px; }.krita-help p { inset-inline-end: -4px; }
+}
+/* Embedded native editing workspace and image-coordinate tools. */
+.studio-workspace-switch{display:flex;align-items:center;gap:5px;width:fit-content;padding:5px;border:1px solid var(--border);background:var(--surface);border-radius:11px;margin-bottom:18px}
+.studio-workspace-switch button{display:flex;align-items:center;justify-content:center;gap:8px;padding:10px 18px;border:1px solid transparent;border-radius:7px;background:transparent;color:var(--muted);font:inherit;font-size:12px;cursor:pointer}.studio-workspace-switch button[aria-pressed=true]{color:var(--text);background:var(--accent-soft);border-color:color-mix(in srgb,var(--accent) 35%,transparent)}.studio-workspace-switch button:disabled{opacity:.5;cursor:default}.studio-krita-workspace[hidden]{display:none}
+.krita-editor.is-embedded{display:block;width:100%;max-width:none;max-height:none;margin:0;box-shadow:none;overflow:visible}.is-embedded .krita-header{padding:16px 20px}.is-embedded .krita-layout{height:min(690px,65dvh)}.is-embedded.is-empty .krita-layout{height:auto}.krita-tool-options{padding:9px 15px;border-bottom:1px solid var(--border);display:flex;flex-wrap:wrap;gap:9px;align-items:center}.krita-tools{display:flex;flex-wrap:wrap;gap:2px}.krita-tools button{font-size:11px;padding:6px 9px;min-height:30px}.krita-tools button[aria-pressed=true]{background:var(--accent-soft);color:var(--accent);border-color:var(--border)}.krita-brush-options{display:flex;align-items:center;gap:10px;margin-inline-start:auto}.krita-brush-options label{display:flex;align-items:center;gap:7px;font-size:11px}.krita-brush-options input[type=number]{width:56px;padding:4px;color:var(--text);border:1px solid var(--border);border-radius:5px;background:var(--surface)}.krita-brush-options input[type=color]{width:29px;height:28px;padding:2px;border:1px solid var(--border);border-radius:5px;background:var(--surface)}.krita-brush-options button{font-size:10px;min-height:27px;padding:4px 7px}
+.krita-image-surface{position:relative;flex-shrink:1;line-height:0}.krita-overlay{position:absolute;inset:0;width:100%;height:100%;cursor:crosshair;touch-action:none}.krita-selection{position:absolute;border:1px dashed #fff;outline:1px dashed #222;box-sizing:border-box;pointer-events:none}.krita-prompt-bubble{position:absolute;width:270px;max-width:75vw;z-index:2;line-height:1.5;background:var(--ke-surface);border:1px solid var(--ke-accent);box-shadow:0 12px 45px #0008;border-radius:12px;padding:12px;display:grid;gap:9px}.krita-prompt-bubble:before{content:'';position:absolute;top:-7px;inset-inline-start:18px;width:12px;height:12px;background:var(--ke-surface);border-top:1px solid var(--ke-accent);border-left:1px solid var(--ke-accent);transform:rotate(45deg)}.krita-prompt-bubble strong{display:flex;gap:7px;align-items:center;font-size:12px}.krita-prompt-bubble textarea{width:100%;box-sizing:border-box;resize:vertical;min-height:68px;padding:8px;font:inherit;font-size:12px;color:var(--ke-text);background:var(--ke-page);border:1px solid var(--ke-border);border-radius:6px}.krita-prompt-bubble small{font-size:10px;color:var(--ke-muted)}.krita-prompt-bubble button{font-size:11px}
+.krita-native-properties{padding:12px;display:grid;gap:9px}.krita-native-properties:empty{display:none}.krita-native-properties textarea,.krita-native-properties select,.krita-layer-properties select{width:100%;box-sizing:border-box;font:inherit;font-size:11px;color:var(--ke-text);background:var(--ke-page);border:1px solid var(--ke-border);border-radius:5px;padding:7px}.krita-native-properties textarea{min-height:70px;resize:vertical}.krita-native-properties label{display:flex;gap:6px;align-items:center}.krita-native-properties button{font-size:11px;background:var(--accent-soft);border-color:var(--ke-border)}.krita-native-properties small{color:var(--ke-muted)}.krita-layer-actions{display:flex;gap:2px;margin-bottom:9px}.krita-layer-actions button{width:auto;min-width:28px;padding:5px}.krita-layer-properties>select{margin:9px 0}.krita-layer-properties>button{margin-bottom:5px;font-size:11px}.krita-layer-select>span:last-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.krita-inspector{overflow:auto}.krita-layer-list{flex:1 0 auto;max-height:230px}.krita-native-properties+.krita-inspector-heading{flex-shrink:0}
+@media(max-width:760px){.studio-workspace-switch{width:100%;box-sizing:border-box}.studio-workspace-switch button{flex:1;padding:8px 6px;font-size:10px}.studio-workspace-switch button svg{width:14px}.is-embedded .krita-layout{height:auto}.krita-tool-options{padding:8px}.krita-brush-options{margin-inline-start:0}.krita-prompt-bubble{width:230px}.krita-native-properties{max-height:240px;overflow:auto}}
+.krita-layer-properties input:not([type=range]):not([type=checkbox]){width:100%;min-width:0;box-sizing:border-box;padding:6px;border:1px solid var(--ke-border);border-radius:5px;color:var(--ke-text);background:var(--ke-page);font:inherit;font-size:11px}.krita-layer-properties label{flex-wrap:wrap;gap:6px}.krita-transform{font-size:11px;border-top:1px solid var(--ke-border);padding-top:10px;margin:8px 0 12px}.krita-transform summary{cursor:pointer;color:var(--ke-muted);margin-bottom:9px}.krita-transform label{display:flex;gap:6px;margin:5px 0}.krita-transform button{margin-top:8px}
+
+/* Keep enlarged image edges reachable; pointer mapping remains in document pixels. */
+.krita-canvas.is-zoomed{align-items:flex-start;justify-content:flex-start}
+.is-zoomed .krita-image-surface{max-width:none;max-height:none;flex-shrink:0;margin:auto}
+.is-zoomed .krita-image-surface img{width:100%;max-width:none;max-height:none;height:auto}
+.krita-mask-controls{display:inline-flex;flex-wrap:wrap;gap:5px;border-inline-start:1px solid var(--ke-border);padding-inline-start:8px}
+.krita-brush-cursor{position:absolute;pointer-events:none;border:1px solid #fff;box-shadow:0 0 0 1px #292333;border-radius:50%;transform:translate(-50%,-50%);box-sizing:border-box}
+.krita-brush-cursor.is-eraser{border-color:#ff9da9;box-shadow:0 0 0 1px #6c2634}
+.krita-overlay:focus-visible{outline:2px solid var(--ke-accent);outline-offset:3px}
+.krita-prompt-bubble select,.krita-prompt-bubble input:not([type=color]):not([type=checkbox]){width:100%;box-sizing:border-box;background:var(--ke-page);color:var(--ke-text);border:1px solid var(--ke-border);border-radius:6px;padding:7px;font:inherit;font-size:12px}
+.krita-prompt-bubble{max-height:min(500px,65dvh);overflow:auto}
+.krita-prompt-bubble label{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:11px}
+.krita-model-notice{display:grid;gap:6px;border:1px solid var(--ke-border);padding:8px;border-radius:6px;line-height:1.5}
+.krita-model-notice code{overflow-wrap:anywhere;font-size:10px;line-height:1.5}
+.krita-prompt-bubble{box-sizing:border-box}

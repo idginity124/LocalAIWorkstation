@@ -1,0 +1,51 @@
+# Dependencies and builds
+.venv/
+venv/
+node_modules/
+dist/
+build/
+*.egg-info/
+__pycache__/
+*.py[cod]
+*.tsbuildinfo
+.pytest_cache/
+.ruff_cache/
+.coverage*
+htmlcov/
+
+# Local configuration, credentials and databases
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.sqlite*
+*.db
+*.db-*
+
+# Local engines, model caches, recordings, outputs and diagnostic reports
+runtime/
+.runtime/
+runtime-reports/
+models/
+outputs/
+backups/
+*.gguf
+*.safetensors
+*.pth
+*.pt
+*.onnx
+*.kra
+*.kra~
+*.log
+*.part
+*.zip
+*.tar.gz
+playwright-report/
+test-results/
+
+# Editor / OS files
+.idea/
+.vscode/
+.DS_Store
+*~
